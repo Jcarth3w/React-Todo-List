@@ -22,7 +22,7 @@ export const TodoWrapper = () => {
         }
 
         const deleteTodo = id => {
-            setTodos(todos.filter(todo => todo.id !== id))
+            setTodos(todos.map(todo => todo.id === id ? {...todo, deleted: true} : todo));
         }
 
         const editTodo = id => {
@@ -32,6 +32,10 @@ export const TodoWrapper = () => {
         const editTask = (task, id) => {
             setTodos(todos.map(todo => todo.id === id ? {todo, task, isEditing: !todo.isEditing} : todo))
     
+        }
+
+        const clearTodos = () => {
+            setTodos([]);
         }
     
 
@@ -48,6 +52,7 @@ export const TodoWrapper = () => {
                 toggleComplete={toggleComplete} deleteTodo={deleteTodo} editTodo={editTodo}/>
                 )
             ))}
+            <button className='todo-btn' onClick={clearTodos}>Clear</button>
         </div>
     )
 }
